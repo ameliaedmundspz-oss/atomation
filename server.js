@@ -2,6 +2,11 @@ import express from "express";
 import cors from "cors";
 
 const app = express();
+app.use((req, res, next) => {
+  res.removeHeader("X-Frame-Options");
+  res.setHeader("Content-Security-Policy", "frame-ancestors *");
+  next();
+});
 app.use(cors());
 
 // Your URLs (change these)
